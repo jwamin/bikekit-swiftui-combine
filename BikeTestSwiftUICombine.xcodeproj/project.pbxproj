@@ -38,6 +38,7 @@
 		575B1F8522B18768002A18B0 /* BikeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeModel.swift; sourceTree = "<group>"; };
 		575B1F8622B18768002A18B0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		575B1F8B22B187A1002A18B0 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
+		57633D7522B2E87A00025F7F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +55,7 @@
 		575B1F6322B18734002A18B0 = {
 			isa = PBXGroup;
 			children = (
+				57633D7522B2E87A00025F7F /* README.md */,
 				575B1F6E22B18734002A18B0 /* test */,
 				575B1F6D22B18734002A18B0 /* Products */,
 			);
