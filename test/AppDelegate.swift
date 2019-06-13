@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  test
+//  BikeKitSwiftCombine
 //
 //  Created by Joss Manger on 6/12/19.
 //  Copyright © 2019 Joss Manger. All rights reserved.

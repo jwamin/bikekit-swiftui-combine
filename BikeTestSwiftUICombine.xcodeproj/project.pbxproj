@@ -7,16 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		570D760922B1888B000795BB /* StationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570D760822B1888B000795BB /* StationDetailView.swift */; };
+		575272C422B1911300B637D8 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575272C322B1911300B637D8 /* TestData.swift */; };
 		575B1F7022B18734002A18B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575B1F6F22B18734002A18B0 /* AppDelegate.swift */; };
 		575B1F7222B18734002A18B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575B1F7122B18734002A18B0 /* SceneDelegate.swift */; };
 		575B1F7422B18734002A18B0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575B1F7322B18734002A18B0 /* ContentView.swift */; };
 		575B1F7622B18736002A18B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 575B1F7522B18736002A18B0 /* Assets.xcassets */; };
 		575B1F7922B18736002A18B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 575B1F7822B18736002A18B0 /* Preview Assets.xcassets */; };
 		575B1F7C22B18736002A18B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 575B1F7A22B18736002A18B0 /* LaunchScreen.storyboard */; };
+		575B1F8722B18768002A18B0 /* CombineNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575B1F8322B18767002A18B0 /* CombineNetworking.swift */; };
+		575B1F8822B18768002A18B0 /* CodableStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575B1F8422B18768002A18B0 /* CodableStructs.swift */; };
+		575B1F8922B18768002A18B0 /* BikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575B1F8522B18768002A18B0 /* BikeModel.swift */; };
+		575B1F8A22B18768002A18B0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575B1F8622B18768002A18B0 /* Constants.swift */; };
+		575B1F8C22B187A1002A18B0 /* data in Resources */ = {isa = PBXBuildFile; fileRef = 575B1F8B22B187A1002A18B0 /* data */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		575B1F6C22B18734002A18B0 /* test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		570D760822B1888B000795BB /* StationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailView.swift; sourceTree = "<group>"; };
+		575272C322B1911300B637D8 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		575B1F6C22B18734002A18B0 /* BikeTestSwiftUICombine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BikeTestSwiftUICombine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		575B1F6F22B18734002A18B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		575B1F7122B18734002A18B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		575B1F7322B18734002A18B0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -24,6 +33,11 @@
 		575B1F7822B18736002A18B0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		575B1F7B22B18736002A18B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		575B1F7D22B18736002A18B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		575B1F8322B18767002A18B0 /* CombineNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombineNetworking.swift; sourceTree = "<group>"; };
+		575B1F8422B18768002A18B0 /* CodableStructs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableStructs.swift; sourceTree = "<group>"; };
+		575B1F8522B18768002A18B0 /* BikeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeModel.swift; sourceTree = "<group>"; };
+		575B1F8622B18768002A18B0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		575B1F8B22B187A1002A18B0 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +62,7 @@
 		575B1F6D22B18734002A18B0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				575B1F6C22B18734002A18B0 /* test.app */,
+				575B1F6C22B18734002A18B0 /* BikeTestSwiftUICombine.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -56,9 +70,16 @@
 		575B1F6E22B18734002A18B0 /* test */ = {
 			isa = PBXGroup;
 			children = (
+				575B1F8B22B187A1002A18B0 /* data */,
+				575B1F8522B18768002A18B0 /* BikeModel.swift */,
+				575272C322B1911300B637D8 /* TestData.swift */,
+				575B1F8422B18768002A18B0 /* CodableStructs.swift */,
+				575B1F8322B18767002A18B0 /* CombineNetworking.swift */,
+				575B1F8622B18768002A18B0 /* Constants.swift */,
 				575B1F6F22B18734002A18B0 /* AppDelegate.swift */,
 				575B1F7122B18734002A18B0 /* SceneDelegate.swift */,
 				575B1F7322B18734002A18B0 /* ContentView.swift */,
+				570D760822B1888B000795BB /* StationDetailView.swift */,
 				575B1F7522B18736002A18B0 /* Assets.xcassets */,
 				575B1F7A22B18736002A18B0 /* LaunchScreen.storyboard */,
 				575B1F7D22B18736002A18B0 /* Info.plist */,
@@ -78,9 +99,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		575B1F6B22B18734002A18B0 /* test */ = {
+		575B1F6B22B18734002A18B0 /* BikeTestSwiftUICombine */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 575B1F8022B18736002A18B0 /* Build configuration list for PBXNativeTarget "test" */;
+			buildConfigurationList = 575B1F8022B18736002A18B0 /* Build configuration list for PBXNativeTarget "BikeTestSwiftUICombine" */;
 			buildPhases = (
 				575B1F6822B18734002A18B0 /* Sources */,
 				575B1F6922B18734002A18B0 /* Frameworks */,
@@ -90,9 +111,9 @@
 			);
 			dependencies = (
 			);
-			name = test;
+			name = BikeTestSwiftUICombine;
 			productName = test;
-			productReference = 575B1F6C22B18734002A18B0 /* test.app */;
+			productReference = 575B1F6C22B18734002A18B0 /* BikeTestSwiftUICombine.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -110,7 +131,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 575B1F6722B18734002A18B0 /* Build configuration list for PBXProject "test" */;
+			buildConfigurationList = 575B1F6722B18734002A18B0 /* Build configuration list for PBXProject "BikeTestSwiftUICombine" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -123,7 +144,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				575B1F6B22B18734002A18B0 /* test */,
+				575B1F6B22B18734002A18B0 /* BikeTestSwiftUICombine */,
 			);
 		};
 /* End PBXProject section */
@@ -135,6 +156,7 @@
 			files = (
 				575B1F7C22B18736002A18B0 /* LaunchScreen.storyboard in Resources */,
 				575B1F7922B18736002A18B0 /* Preview Assets.xcassets in Resources */,
+				575B1F8C22B187A1002A18B0 /* data in Resources */,
 				575B1F7622B18736002A18B0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,9 +168,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				575272C422B1911300B637D8 /* TestData.swift in Sources */,
 				575B1F7022B18734002A18B0 /* AppDelegate.swift in Sources */,
+				575B1F8822B18768002A18B0 /* CodableStructs.swift in Sources */,
+				570D760922B1888B000795BB /* StationDetailView.swift in Sources */,
 				575B1F7222B18734002A18B0 /* SceneDelegate.swift in Sources */,
 				575B1F7422B18734002A18B0 /* ContentView.swift in Sources */,
+				575B1F8A22B18768002A18B0 /* Constants.swift in Sources */,
+				575B1F8922B18768002A18B0 /* BikeModel.swift in Sources */,
+				575B1F8722B18768002A18B0 /* CombineNetworking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,7 +351,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		575B1F6722B18734002A18B0 /* Build configuration list for PBXProject "test" */ = {
+		575B1F6722B18734002A18B0 /* Build configuration list for PBXProject "BikeTestSwiftUICombine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				575B1F7E22B18736002A18B0 /* Debug */,
@@ -332,7 +360,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		575B1F8022B18736002A18B0 /* Build configuration list for PBXNativeTarget "test" */ = {
+		575B1F8022B18736002A18B0 /* Build configuration list for PBXNativeTarget "BikeTestSwiftUICombine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				575B1F8122B18736002A18B0 /* Debug */,
