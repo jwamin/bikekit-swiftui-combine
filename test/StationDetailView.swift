@@ -30,15 +30,21 @@ struct StationDetailView : View {
                 
                     SymbolView(color: .red, label: "Docks", number: station.status!.num_docks_available, didAppear: $viewDidAppear)
                 
-                }.background(Color.blue)
-                .onAppear(perform: {
-                    withAnimation(self.mybasic){
-                        self.viewDidAppear = true
-                    }
-                })
+                }.background(Color.blue).onAppear(perform: delayAnimation)
+        
         
         
     }
+    
+    func delayAnimation(){
+        let timer = Timer(fire: Date().addingTimeInterval(0.3), interval: 0, repeats: false) { (timer) in
+            withAnimation(self.mybasic){
+                self.viewDidAppear = true
+            }
+        }
+        RunLoop.main.add(timer, forMode: .default)
+    }
+    
 }
 
 struct SymbolView : View {
