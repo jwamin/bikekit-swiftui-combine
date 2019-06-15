@@ -20,6 +20,7 @@
 		575B1F8922B18768002A18B0 /* BikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575B1F8522B18768002A18B0 /* BikeModel.swift */; };
 		575B1F8A22B18768002A18B0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575B1F8622B18768002A18B0 /* Constants.swift */; };
 		575B1F8C22B187A1002A18B0 /* data in Resources */ = {isa = PBXBuildFile; fileRef = 575B1F8B22B187A1002A18B0 /* data */; };
+		57F0F49322B4364A001361AB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F0F49222B4364A001361AB /* MapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		575B1F8622B18768002A18B0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		575B1F8B22B187A1002A18B0 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
 		57633D7522B2E87A00025F7F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		57F0F49222B4364A001361AB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				575B1F7122B18734002A18B0 /* SceneDelegate.swift */,
 				575B1F7322B18734002A18B0 /* ContentView.swift */,
 				570D760822B1888B000795BB /* StationDetailView.swift */,
+				57F0F49222B4364A001361AB /* MapView.swift */,
 				575B1F7522B18736002A18B0 /* Assets.xcassets */,
 				575B1F7A22B18736002A18B0 /* LaunchScreen.storyboard */,
 				575B1F7D22B18736002A18B0 /* Info.plist */,
@@ -177,6 +180,7 @@
 				575B1F7222B18734002A18B0 /* SceneDelegate.swift in Sources */,
 				575B1F7422B18734002A18B0 /* ContentView.swift in Sources */,
 				575B1F8A22B18768002A18B0 /* Constants.swift in Sources */,
+				57F0F49322B4364A001361AB /* MapView.swift in Sources */,
 				575B1F8922B18768002A18B0 /* BikeModel.swift in Sources */,
 				575B1F8722B18768002A18B0 /* CombineNetworking.swift in Sources */,
 			);

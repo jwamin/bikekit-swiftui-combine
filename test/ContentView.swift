@@ -27,28 +27,42 @@ struct ContentView : View {
                 .navigationBarItems(trailing: Button(action: {self.model.refresh()}, label: {
                     Image(systemName: "arrow.clockwise")
                 }))
-        }.accentColor(.blue)
+        }.accentColor(.white).background(Color.blue)
     }
 }
 
 struct StationCell : View{
     
-    var model:NYCBikeStationInfo?
+    var model:NYCFullBikeInfo?
     
     var body: some View{
-        HStack{
+        HStack(alignment: .bottom){
             VStack(alignment:.leading){
                 Text((model != nil) ? model!.name : "Station Name")
                 Text((model != nil) ? "Capacity: \(model!.capacity!)" : "Station Capacity").font(.subheadline).color(.secondary)
             }
             Spacer()
-                VStack(alignment:.leading){
-                    Text((model != nil) ? "\(model!.status!.num_bikes_available) bikes" : "bikes")
-                    Text((model != nil) ? "\(model!.status!.num_docks_available) docks" : "docks")
+                HStack(alignment:.center){
+                    NumberSymbolProvider(number: model!.status.num_bikes_available, unit: "Bikes")
+                    NumberSymbolProvider(number: model!.status.num_docks_available, unit: "Docks")
                 }
         }
     }
     
+}
+
+struct NumberSymbolProvider : View {
+    
+    var number:Int
+    var unit:String
+    
+    var body: some View{
+        let numberString = (number>50) ? "50" : "\(number)"
+        return VStack(alignment: .center){
+                Image(systemName: "\(numberString).circle")
+                Text("\(unit)").font(.caption)
+        }
+    }
 }
 
 #if DEBUG

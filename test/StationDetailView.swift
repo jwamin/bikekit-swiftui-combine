@@ -10,29 +10,43 @@ import SwiftUI
 
 struct StationDetailView : View {
     
-    let station:NYCBikeStationInfo
+    let station:NYCFullBikeInfo
     
     @State var viewDidAppear:Bool = false
     
     let mybasic = Animation.spring().delay(0.3)
     
+    func fixNumber(num:Int)->Int{
+        (num>50) ? 50 : num
+    }
+    
     var body: some View {
         
-    
-            VStack(alignment:.center) {
+        
+            VStack{
                 
-                SymbolView(color: .yellow, number: station.status!.num_bikes_available, didAppear: $viewDidAppear)
+                MapView(coordinate: station.coordinate)
+                    .frame(height:300)
+                
+                
+                HStack(alignment: .center, spacing: 50){
+                
+                SymbolView(color: .yellow, number: fixNumber(num: station.status.num_bikes_available), didAppear: $viewDidAppear)
+                    SymbolView(color: .red, label: "Docks", number: fixNumber(num: station.status.num_docks_available), didAppear: $viewDidAppear)
+                    
+                    }.offset(y:-78)
+                    .padding(.bottom, -78)
                 
                 VStack{
                     Text(station.name).font(.title).color(.white)
-                    Text("\(station.capacity!)").font(.subheadline).color(.white)
-                    }.padding()
+                    Text("Capacity: \(station.capacity!)").font(.subheadline).color(.white)
+                    }
+                Spacer()
+        }.background(Color.blue)
                 
-                    SymbolView(color: .red, label: "Docks", number: station.status!.num_docks_available, didAppear: $viewDidAppear)
-                
-                }.background(Color.blue).onAppear(perform: delayAnimation)
+                .onAppear(perform: delayAnimation).edgesIgnoringSafeArea(.all)
         
-        
+       
         
     }
     
@@ -67,15 +81,17 @@ struct SymbolView : View {
             
             Image(systemName:"\(number).circle")
                 .resizable()
+                .frame(height:75)
                 .foregroundColor(.white)
                 .padding()
-                .aspectRatio(contentMode: .fit)
+                .aspectRatio(1,contentMode: .fit)
                 .rotation3DEffect(( didAppear ? end : start ), axis: (0,1,0))
                 .opacity(didAppear ? 1.0 : 0)
             
-            Text(label).font(.subheadline)
-            }.background(color).padding()
-        
+            Text(label)
+                .font(.subheadline).color(.white)
+            }.padding()
+            .background(color).cornerRadius(25).accentColor(.yellow)
         
     }
     
