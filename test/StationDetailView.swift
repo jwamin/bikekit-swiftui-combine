@@ -20,6 +20,12 @@ struct StationDetailView : View {
         (num>50) ? 50 : num
     }
     
+    var adjustedDate:String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm dd/MM/YYYY"
+        return formatter.string(from: Date(timeIntervalSince1970: station.status.last_reported.timeIntervalSinceReferenceDate))
+    }
+    
     var body: some View {
         
         
@@ -41,6 +47,15 @@ struct StationDetailView : View {
                     Text(station.name).font(.title).color(.white)
                     Text("Capacity: \(station.capacity!)").font(.subheadline).color(.white)
                     }
+                
+                VStack(alignment:.leading,spacing: 8){
+                    
+                    Text("Installed: \(station.status.is_installed)")
+                    Text("Renting: \(station.status.is_renting)")
+                    Text("Can return bikes: \(station.status.is_returning)")
+                    Text("Updated: \(adjustedDate)")
+                    
+                }
                 Spacer()
         }.background(Color.blue)
                 

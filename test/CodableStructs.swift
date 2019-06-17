@@ -34,6 +34,9 @@ struct NYCStationStatusWrapper : GBFS{
 
 public struct NYCFullBikeInfo : GBFS, Identifiable{
     
+    
+    
+    
     static func initWithInfo(info:NYCBikeStationInfo, status:NYCBikeStationStatus) -> Self{
         
         return NYCFullBikeInfo(station_id: info.station_id, external_id: info.external_id, name: info.name, short_name: info.short_name, lat: info.lat, lon: info.lon, region_id: info.region_id, rental_methods: info.rental_methods, capacity: info.capacity, rental_url: info.rental_url, electric_bike_surcharge_waiver: info.electric_bike_surcharge_waiver, eightd_has_key_dispenser: info.eightd_has_key_dispenser, status: status)

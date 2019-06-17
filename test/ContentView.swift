@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView : View {
     
-    @ObjectBinding var model:Favourites = Favourites()
+    @ObjectBinding var model:StationDataModel = StationDataModel()
     
     var body: some View {
         NavigationView{ 
@@ -70,11 +70,11 @@ struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
         Group{
             ContentView(model: DummyData())
-            ContentView(model: DummyData())
-                .environment(\.colorScheme, .dark)
-                .environment(\.sizeCategory, .extraExtraExtraLarge)
-            StationCell()
-                .previewLayout(PreviewLayout.fixed(width: 300, height: 70))
+//            ContentView(model: DummyData())
+//                .environment(\.colorScheme, .dark)
+//                .environment(\.sizeCategory, .extraExtraExtraLarge)
+//            StationCell()
+//                .previewLayout(PreviewLayout.fixed(width: 300, height: 70))
         }
     }
 }

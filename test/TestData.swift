@@ -17,19 +17,17 @@ var testData:[NYCFullBikeInfo] = {
         .map{ data in
             data.data["stations"]
         }
-        .eraseToAnyPublisher()
+        //.eraseToAnyPublisher()
     
     let statusStream = load(file:"data/status.json").decode(type: NYCStationStatusWrapper.self, decoder: JSONDecoder())
         .map{ data in
             data.data["stations"]
         }
-        .eraseToAnyPublisher()
+        //.eraseToAnyPublisher()
     
     _ = Publishers.Zip(infoStream, statusStream).sink { tuple in
         let info = tuple.0!
         let status = tuple.1!
-        
-        
         
         for station in info {
             if let updateStation = status.first(where: { (status) -> Bool in
@@ -40,8 +38,6 @@ var testData:[NYCFullBikeInfo] = {
             }
             
         }
-        
-        
         
     }
     

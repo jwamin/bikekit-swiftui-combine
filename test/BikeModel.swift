@@ -9,44 +9,13 @@
 import SwiftUI
 import Combine
 
-class Favourites : BindableObject, Subscriber {
+class StationDataModel : BindableObject {
     
-    func receive(_ input: ([NYCBikeStationInfo]?, [NYCBikeStationStatus]?)) -> Subscribers.Demand {
-        let tuple = input
-        let info = tuple.0!
-        let status = tuple.1!
-        
-        var newInfo = [NYCFullBikeInfo]()
-        
-        for station in info {
-            if let statusForStation = status.first(where: { (status) -> Bool in
-                status.station_id == station.station_id
-            }) {
-                var copy = NYCFullBikeInfo.initWithInfo(info: station, status: statusForStation)
-                newInfo.append(copy)
-            }
-            
-        }
-        
-        self.stationsWithData = newInfo
-        
-        return Subscribers.Demand.none
-    }
+    let infoRequest = URLRequest(url: Urls.STATION_INFO_URL)
+    let statusRequest = URLRequest(url: Urls.STATION_STATUS_URL)
+    let decoder = JSONDecoder()
     
-    func receive(completion: Subscribers.Completion<Error>) {
-        print(completion)
-    }
-    
-    
-    func receive(subscription: Subscription) {
-        subscription.request(Subscribers.Demand.max(1))
-    }
-    
-    
-    typealias Input = ([NYCBikeStationInfo]?,[NYCBikeStationStatus]?)
-    
-    typealias Failure = Error
-    
+    let infoStream:AnyPublisher<[NYCBikeStationInfo]?, Error>
     
     var didChange = PassthroughSubject<Bool,Never>()
     
@@ -58,40 +27,81 @@ class Favourites : BindableObject, Subscriber {
     }
     
     init(){
-
+        infoStream = URLSession.shared.send(request:infoRequest)
+            .decode(type: NYCStationInfoWrapper.self, decoder: decoder)
+            .map{ decoded in
+                decoded.data["stations"]
+            }
+            .eraseToAnyPublisher()
+        
         refresh()
         
     }
     
+    
+    /// Perform two URLRequests, process with combine and publish to subscriber (self)
     func refresh(){
-        print("refresh called")
-        let infoRequest = URLRequest(url: Urls.STATION_INFO_URL)
-        let statusRequest = URLRequest(url: Urls.STATION_STATUS_URL)
-        
-        let infoStream = URLSession.shared.send(request:infoRequest).eraseToAnyPublisher().decode(type: NYCStationInfoWrapper.self, decoder: JSONDecoder())
-            .map{ data in
-                data.data["stations"]
-            }
-            //.eraseToAnyPublisher()
         
         let statusStream = URLSession.shared.send(request:statusRequest)
-            .decode(type: NYCStationStatusWrapper.self, decoder: JSONDecoder())
-            .map{ data in
-                data.data["stations"]
+            .decode(type: NYCStationStatusWrapper.self, decoder: decoder)
+            .map{ decoded in
+                decoded.data["stations"]
             }
-            //.eraseToAnyPublisher()
-        
-            var zipped = Publishers.Zip(infoStream, statusStream)
-                
-                zipped.eraseToAnyPublisher().subscribe(self)
+            .eraseToAnyPublisher()
         
         
+        let zipped = Publishers.Zip(infoStream,statusStream)
+        
+        zipped.eraseToAnyPublisher().subscribe(self)
     }
     
     
 }
 
-class DummyData : Favourites {
+
+extension StationDataModel : Subscriber{
+    
+    typealias Input = ([NYCBikeStationInfo]?,[NYCBikeStationStatus]?)
+    
+    typealias Failure = Error
+    
+    func receive(_ input: ([NYCBikeStationInfo]?, [NYCBikeStationStatus]?)) -> Subscribers.Demand {
+        
+        let tuple = input
+        let info = tuple.0!
+        let status = tuple.1!
+        
+        var newInfo = [NYCFullBikeInfo]()
+        
+        for station in info {
+            if let statusForStation = status.first(where: { (status) -> Bool in
+                status.station_id == station.station_id
+            }) {
+                let copy = NYCFullBikeInfo.initWithInfo(info: station, status: statusForStation)
+                newInfo.append(copy)
+            }
+            
+        }
+        
+        self.stationsWithData = newInfo
+        return Subscribers.Demand.none
+    }
+    
+    func receive(completion: Subscribers.Completion<Error>) {
+        
+        print(completion)
+    }
+    
+    
+    func receive(subscription: Subscription) {
+        
+        subscription.request(Subscribers.Demand.max(1))
+    }
+    
+}
+
+
+class DummyData : StationDataModel {
     
     override func refresh(){
         stationsWithData = testData
@@ -100,8 +110,8 @@ class DummyData : Favourites {
 }
 
 
-    
 
-        
-        
+
+
+
 
