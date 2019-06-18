@@ -16,7 +16,7 @@ struct ContentView : View {
         NavigationView{ 
             List{
                 Section{
-                ForEach(model.stationsWithData) { station in
+                ForEach(model.stationData) { station in
                     NavigationButton(destination:StationDetailView(station:station)){
                         StationCell(model: station)
                     }

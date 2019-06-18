@@ -19,9 +19,9 @@ class StationDataModel : BindableObject {
     
     var didChange = PassthroughSubject<Bool,Never>()
     
-    var stationsWithData:[NYCFullBikeInfo] = []{
+    var stationData:[NYCFullBikeInfo] = []{
         didSet{
-            print(stationsWithData.count)
+            print(stationData.count)
             self.didChange.send(true)
         }
     }
@@ -58,6 +58,9 @@ class StationDataModel : BindableObject {
     
 }
 
+extension JSONDecoder: TopLevelDecoder {  }
+
+
 
 extension StationDataModel : Subscriber{
     
@@ -83,7 +86,7 @@ extension StationDataModel : Subscriber{
             
         }
         
-        self.stationsWithData = newInfo
+        self.stationData = newInfo
         return Subscribers.Demand.none
     }
     
@@ -104,7 +107,7 @@ extension StationDataModel : Subscriber{
 class DummyData : StationDataModel {
     
     override func refresh(){
-        stationsWithData = testData
+        stationData = testData
     }
     
 }

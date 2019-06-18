@@ -48,15 +48,17 @@ struct StationDetailView : View {
                     Text("Capacity: \(station.capacity!)").font(.subheadline).color(.white)
                     }
                 
-                VStack(alignment:.leading,spacing: 8){
-                    
-                    Text("Installed: \(station.status.is_installed)")
-                    Text("Renting: \(station.status.is_renting)")
-                    Text("Can return bikes: \(station.status.is_returning)")
-                    Text("Updated: \(adjustedDate)")
+                VStack(alignment:.leading){
+                    Group{
+                    Reporting(num: station.status.is_installed, symbol: "heart",str: "installed")
+                        Reporting(num: station.status.is_renting, symbol: "flag",str:"renting")
+                        Reporting(num: station.status.is_returning, symbol: "star",str:"returning")
                     
                 }
+                    Text("Updated: \(adjustedDate)")
                 Spacer()
+                    
+                    }.foregroundColor(.white)
         }.background(Color.blue)
                 
                 .onAppear(perform: delayAnimation).edgesIgnoringSafeArea(.all)
@@ -75,6 +77,31 @@ struct StationDetailView : View {
     }
     
 }
+
+
+struct Reporting : View {
+    
+    let num:Int
+    let symbol:String
+    let str:String
+    
+    var slash:Bool{
+        num<1
+    }
+    
+    var symbolString:String{
+        symbol+"\((slash) ? ".slash" : "" )"
+    }
+    
+    var body: some View{
+        HStack(alignment:.center){
+            Image(systemName: symbolString).resizable().frame(width: 50, height: 50).padding().background( (slash) ? Color.gray : Color.blue).cornerRadius(25)
+            Text("\((slash) ? "Not " : "" )"+str)
+        }
+    }
+    
+}
+
 
 struct SymbolView : View {
     
@@ -117,7 +144,7 @@ struct SymbolView : View {
 #if DEBUG
 struct StationDetailView_Previews : PreviewProvider {
     static var previews: some View {
-        StationDetailView(station: testData[0])
+        return StationDetailView(station: testData[0])
     }
 }
 #endif
