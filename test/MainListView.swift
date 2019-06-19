@@ -19,7 +19,7 @@ struct ContentView : View {
                 ForEach(model.stationData) { station in
                     NavigationButton(destination:StationDetailView(station:station)){
                         StationCell(model: station)
-                    }
+                    }.padding().background(Color.blue).cornerRadius(25).foregroundColor(.white)
                 }
                 }
             }.navigationBarTitle(Text("Bike Stations"))
@@ -27,7 +27,7 @@ struct ContentView : View {
                 .navigationBarItems(trailing: Button(action: {self.model.refresh()}, label: {
                     Image(systemName: "arrow.clockwise")
                 }))
-        }.accentColor(.white).background(Color.blue)
+        }.accentColor(.white)
     }
 }
 
@@ -39,7 +39,7 @@ struct StationCell : View{
         HStack(alignment: .bottom){
             VStack(alignment:.leading){
                 Text((model != nil) ? model!.name : "Station Name")
-                Text((model != nil) ? "Capacity: \(model!.capacity!)" : "Station Capacity").font(.subheadline).color(.secondary)
+                Text((model != nil) ? "Capacity: \(model!.capacity!)" : "Station Capacity").font(.subheadline)
             }
             Spacer()
                 HStack(alignment:.center){
