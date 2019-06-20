@@ -21,26 +21,25 @@ extension GBFS {
     }
 }
 
-struct NYCStationInfoWrapper : GBFS {
+struct GBFSStationInfoWrapper : GBFS {
     let last_updated:Date
-    let data:[String:[NYCBikeStationInfo]]
+    let data:[String:[GBFSBikeStationInfo]]
 }
 
-struct NYCStationStatusWrapper : GBFS{
+struct GBFSStationStatusWrapper : GBFS{
     let last_updated:Date
-    let data:[String:[NYCBikeStationStatus]]
+    let data:[String:[GBFSBikeStationStatus]]
 }
 
 
-public struct NYCFullBikeInfo : GBFS, Identifiable{
-    
-    
-    
-    
-    static func initWithInfo(info:NYCBikeStationInfo, status:NYCBikeStationStatus) -> Self{
+public struct GBFSFullBikeInfo : GBFS, Identifiable{
+  
+    static func initWithInfo(info:GBFSBikeStationInfo, status:GBFSBikeStationStatus) -> Self{
         
-        return NYCFullBikeInfo(station_id: info.station_id, external_id: info.external_id, name: info.name, short_name: info.short_name, lat: info.lat, lon: info.lon, region_id: info.region_id, rental_methods: info.rental_methods, capacity: info.capacity, rental_url: info.rental_url, electric_bike_surcharge_waiver: info.electric_bike_surcharge_waiver, eightd_has_key_dispenser: info.eightd_has_key_dispenser, status: status)
-        
+        let fullInfo = GBFSFullBikeInfo(station_id: info.station_id, external_id: info.external_id, name: info.name, short_name: info.short_name, lat: info.lat, lon: info.lon, region_id: info.region_id, rental_methods: info.rental_methods, capacity: info.capacity, rental_url: info.rental_url, electric_bike_surcharge_waiver: info.electric_bike_surcharge_waiver, eightd_has_key_dispenser: info.eightd_has_key_dispenser, status: status)
+      
+      
+      return fullInfo
     }
     
     public var id:String {
@@ -54,20 +53,20 @@ public struct NYCFullBikeInfo : GBFS, Identifiable{
     public let lat:Double
     public let lon:Double
     public let region_id:Int?
-    public let rental_methods:[RentalMethods]
+    public let rental_methods:[GBFSRentalMethods]
     public let capacity:Int?
     public let rental_url:URL
     public let electric_bike_surcharge_waiver:Bool
     public let eightd_has_key_dispenser:Bool
-    public var status:NYCBikeStationStatus
-    
+    public var status:GBFSBikeStationStatus
+    public var isFavourite:Bool = false
     public var coordinate:CLLocationCoordinate2D{
         return CLLocationCoordinate2D(latitude: lat, longitude: lon)
     }
     
 }
 
-public struct NYCBikeStationInfo:GBFS, Identifiable {
+public struct GBFSBikeStationInfo:GBFS, Identifiable {
     
     public var id:String {
         return name
@@ -80,12 +79,12 @@ public struct NYCBikeStationInfo:GBFS, Identifiable {
     public let lat:Double
     public let lon:Double
     public let region_id:Int?
-    public let rental_methods:[RentalMethods]
+    public let rental_methods:[GBFSRentalMethods]
     public let capacity:Int?
     public let rental_url:URL
     public let electric_bike_surcharge_waiver:Bool
     public let eightd_has_key_dispenser:Bool
-    public var status:NYCBikeStationStatus?
+    public var status:GBFSBikeStationStatus?
     
     public var coordinate:CLLocationCoordinate2D{
         return CLLocationCoordinate2D(latitude: lat, longitude: lon)
@@ -100,7 +99,7 @@ public struct NYCBikeStationInfo:GBFS, Identifiable {
     
 }
 
-public enum RentalMethods : String, GBFS {
+public enum GBFSRentalMethods : String, GBFS {
     case key = "KEY"
     case creditCard = "CREDITCARD"
     case paypass = "PAYPASS"
@@ -113,7 +112,7 @@ public enum RentalMethods : String, GBFS {
 
 //{"station_id":"304","num_bikes_available":6,"num_ebikes_available":0,"num_bikes_disabled":1,"num_docks_available":26,"num_docks_disabled":0,"is_installed":1,"is_renting":1,"is_returning":0,"last_reported":1557248000,"eightd_has_available_keys":true,"eightd_active_station_services":[{"id":"a58d9e34-2f28-40eb-b4a6-c8c01375657a"}]},
 
-public struct NYCBikeStationStatus : GBFS{
+public struct GBFSBikeStationStatus : GBFS{
     
     public let station_id:String
     public let num_bikes_available:Int
@@ -128,7 +127,7 @@ public struct NYCBikeStationStatus : GBFS{
     
 }
 
-public struct NYCStationWatchStruct : GBFS {
+public struct GBFSStationWatchStruct : GBFS {
     
     public init(stationId:String,name:String,bikes:String,docks:String,lat:Double,lng:Double) {
         self.name = name
@@ -157,12 +156,12 @@ public struct NYCStationWatchStruct : GBFS {
         let data = try JSONSerialization.data(withJSONObject: any, options: .prettyPrinted)
         print(data)
         let decoder = JSONDecoder()
-        self = try decoder.decode(NYCStationWatchStruct.self, from: data)
+        self = try decoder.decode(GBFSStationWatchStruct.self, from: data)
     }
     
 }
 
-public struct NYCStationWatchEncodingModel : GBFS {
+public struct GBFSStationWatchEncodingModel : GBFS {
     
     public init(stationId:String,name:String,bikes:Int,docks:Int,lat:Double,lng:Double,electric:Int,disabled:Int) {
         self.name = name

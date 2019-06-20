@@ -10,21 +10,36 @@ import SwiftUI
 
 struct ContentView : View {
     
-    @ObjectBinding var model:StationDataModel = StationDataModel()
-    
+  @ObjectBinding var model:StationDataModel = StationDataModel()
+  
+  @State var showFavourites:Bool = false
+  
+  func getColor(station:GBFSFullBikeInfo)->Color{
+    (station.status.is_renting==1) ? Color.blue : Color.red
+  }
+  
     var body: some View {
         NavigationView{ 
             List{
                 Section{
                 ForEach(model.stationData) { station in
-                    NavigationButton(destination:StationDetailView(station:station)){
+                  if !self.showFavourites || station.isFavourite { //Both cases, this is important!
+                    NavigationButton(destination:StationDetailView(station:station).environmentObject(self.model)){
                         StationCell(model: station)
-                    }.padding().background(Color.blue).cornerRadius(25).foregroundColor(.white)
+                    }.padding()
+                      .background(self.getColor(station: station))
+                      .cornerRadius(25)
+                      .foregroundColor(.white)
                 }
+                  }
                 }
             }.navigationBarTitle(Text("Bike Stations"))
                 .listStyle(.grouped)
-                .navigationBarItems(trailing: Button(action: {self.model.refresh()}, label: {
+              .navigationBarItems(leading:Button(action: {self.showFavourites = !self.showFavourites}, label: {
+                withAnimation{
+                (self.showFavourites) ? Image(systemName: "star.fill") : Image(systemName: "star")
+                }
+              }) ,trailing: Button(action: {self.model.refresh()}, label: {
                     Image(systemName: "arrow.clockwise")
                 }))
         }.accentColor(.white)
@@ -33,9 +48,10 @@ struct ContentView : View {
 
 struct StationCell : View{
     
-    var model:NYCFullBikeInfo?
+    var model:GBFSFullBikeInfo?
     
     var body: some View{
+      ZStack{
         HStack(alignment: .bottom){
             VStack(alignment:.leading){
                 Text((model != nil) ? model!.name : "Station Name")
@@ -47,6 +63,17 @@ struct StationCell : View{
                     NumberSymbolProvider(number: model!.status.num_docks_available, unit: "Docks")
                 }
         }
+        if(model!.isFavourite){
+          VStack(alignment:.leading){
+            HStack(alignment: .top){
+              Spacer()
+              Image(systemName: "star.fill").foregroundColor(.yellow).offset(x:15,y:-5)
+              
+            }
+            Spacer()
+          }
+        }
+      }
     }
     
 }

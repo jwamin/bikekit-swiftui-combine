@@ -11,6 +11,10 @@ import Combine
 
 class StationDataModel : BindableObject {
   
+  @UserDefault("favourites", defaultValue: ["281"])
+  var favourites:[String]
+  
+  
   //Requests
   let infoRequest = URLRequest(url: Urls.STATION_INFO_URL)
   let statusRequest = URLRequest(url: Urls.STATION_STATUS_URL)
@@ -25,14 +29,14 @@ class StationDataModel : BindableObject {
   
   //Streams
   var refreshStream: AnySubscriber<NotificationCenter.Publisher.Output, NotificationCenter.Publisher.Failure>?
-  var infoStream:AnyPublisher<[NYCBikeStationInfo]?, Error>?
-  var statusStream:AnyPublisher<[NYCBikeStationStatus]?, Error>?
+  var infoStream:AnyPublisher<[GBFSBikeStationInfo]?, Error>?
+  var statusStream:AnyPublisher<[GBFSBikeStationStatus]?, Error>!
   
   //Subject for SwiftUI notification
   var didChange = PassthroughSubject<Bool,Never>()
   
   //Actual Model data with property observer
-  var stationData:[NYCFullBikeInfo] = []{
+  var stationData:[GBFSFullBikeInfo] = []{
     didSet{
       
       print(stationData.count)
@@ -42,19 +46,74 @@ class StationDataModel : BindableObject {
   
   init(){
     
-    setupStreams()
+    //Setup Streams
+    setupRefreshAndInfoStreams()
+    setupStatusStream()
+    setupCombineLatest()
+    
+    //Call initial refresh
     refresh()
+    
   }
   
+  
+  func setupStatusStream(){
+    
+    let statusStream = NotificationCenter.default.publisher(for: statusNotification, object: self)
+      .compactMap{ note in
+        note.userInfo?["data"] as? Data
+      }
+      .decode(type: GBFSStationStatusWrapper.self, decoder: decoder)
+      .map{ decoded in
+        decoded.data["stations"]
+      }
+      .eraseToAnyPublisher()
+    
+    self.statusStream = statusStream
+    
+  }
+  
+  
+  private func setupCombineLatest(){
+    
+    //Combine publishers with combine latest
+    _ = Publishers.CombineLatest(infoStream,statusStream){
+      ($0,$1)
+      }
+      .assertNoFailure()
+      .map { info,status in
+        
+        var newInfo = [GBFSFullBikeInfo]()
+        
+        for station in info! {
+          
+          if let statusForStation = status!.first(where: { (status) -> Bool in
+            status.station_id == station.station_id
+          }) {
+            var copy = GBFSFullBikeInfo.initWithInfo(info: station, status: statusForStation)
+            copy.isFavourite = {
+              self.favourites.contains(copy.station_id)
+            }()
+            newInfo.append(copy)
+          }
+        }
+        
+        return newInfo
+      }.receive(on: RunLoop.main).assign(to: \.stationData, on: self)
+  }
+  
+  
+  
+  
   /// Sets up Combine Streams, Station info stream, station status stream and refresh button pressed stream
-  func setupStreams(){
+  private func setupRefreshAndInfoStreams(){
     
     //Main information stream, will complete once
     infoStream = URLSession.shared.dataTaskPublisher(for: infoRequest)
       .map{
         $0.data
       }
-      .decode(type: NYCStationInfoWrapper.self, decoder: decoder)
+      .decode(type: GBFSStationInfoWrapper.self, decoder: decoder)
       .map{ decoded in
         decoded.data["stations"]
       }
@@ -71,38 +130,6 @@ class StationDataModel : BindableObject {
         }
       }.eraseToAnySubscriber()
     
-    //processes the result of status update // THIS IS WHAT I WAS PERHAPS PLANNING TO DO IN THE DEMO
-    statusStream = NotificationCenter.default.publisher(for: statusNotification, object: self)
-      .compactMap{ note in
-        note.userInfo?["data"] as? Data
-      }
-      .decode(type: NYCStationStatusWrapper.self, decoder: decoder)
-      .map{ decoded in
-        decoded.data["stations"]
-      }
-      .eraseToAnyPublisher()
-    
-    //Combine publishers with combine latest
-    _ = Publishers.CombineLatest(infoStream,statusStream){
-      ($0,$1)
-      }
-      .assertNoFailure()
-      .map { info,status in
-        
-        var newInfo = [NYCFullBikeInfo]()
-        
-        for station in info! {
-          
-          if let statusForStation = status!.first(where: { (status) -> Bool in
-            status.station_id == station.station_id
-          }) {
-            let copy = NYCFullBikeInfo.initWithInfo(info: station, status: statusForStation)
-            newInfo.append(copy)
-          }
-        }
-        
-        return newInfo
-      }.receive(on: RunLoop.main).assign(to: \.stationData, on: self)
     
   }
   

@@ -9,17 +9,17 @@
 import SwiftUI
 import Combine
 
-var testData:[NYCFullBikeInfo] = {
+var testData:[GBFSFullBikeInfo] = {
     
-    var newInfo = [NYCFullBikeInfo]()
+    var newInfo = [GBFSFullBikeInfo]()
     
-    let infoStream = load(file: "data/stations.json").decode(type: NYCStationInfoWrapper.self, decoder: JSONDecoder())
+    let infoStream = load(file: "data/stations.json").decode(type: GBFSStationInfoWrapper.self, decoder: JSONDecoder())
         .map{ data in
             data.data["stations"]
         }
         //.eraseToAnyPublisher()
     
-    let statusStream = load(file:"data/status.json").decode(type: NYCStationStatusWrapper.self, decoder: JSONDecoder())
+    let statusStream = load(file:"data/status.json").decode(type: GBFSStationStatusWrapper.self, decoder: JSONDecoder())
         .map{ data in
             data.data["stations"]
         }
@@ -33,7 +33,7 @@ var testData:[NYCFullBikeInfo] = {
             if let updateStation = status.first(where: { (status) -> Bool in
                 status.station_id == station.station_id
             }) {
-                var copy = NYCFullBikeInfo.initWithInfo(info: station, status: updateStation)
+                var copy = GBFSFullBikeInfo.initWithInfo(info: station, status: updateStation)
                 newInfo.append(copy)
             }
             

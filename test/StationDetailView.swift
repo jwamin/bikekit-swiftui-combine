@@ -10,10 +10,12 @@ import SwiftUI
 
 struct StationDetailView : View {
     
-    let station:NYCFullBikeInfo
+    let station:GBFSFullBikeInfo
     
     @State var viewDidAppear:Bool = false
-    
+    @EnvironmentObject var model:StationDataModel
+  
+  
     let mybasic = Animation.spring().delay(0.3)
     
     func fixNumber(num:Int)->Int{
@@ -30,10 +32,10 @@ struct StationDetailView : View {
         
         
             VStack{
-                
+
                 MapView(coordinate: station.coordinate)
                     .frame(height:300)
-                
+
                 
                 HStack(alignment: .center, spacing: 50){
                 
@@ -44,7 +46,7 @@ struct StationDetailView : View {
                     .padding(.bottom, -78)
                 
                 VStack{
-                    Text(station.name).font(.title).color(.white)
+                    Text(station.name).font(.title).color(.white).lineLimit(2).padding()
                     Text("Capacity: \(station.capacity!)").font(.subheadline).color(.white)
                     }
                 
@@ -53,7 +55,7 @@ struct StationDetailView : View {
                     Reporting(num: station.status.is_installed, symbol: "heart",str: "installed")
                         Reporting(num: station.status.is_renting, symbol: "flag",str:"renting")
                         Reporting(num: station.status.is_returning, symbol: "star",str:"returning")
-                    
+                      Text("Station ID: \(station.station_id)")
                 }
                     Text("Updated: \(adjustedDate)")
                 Spacer()
