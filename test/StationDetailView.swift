@@ -61,6 +61,7 @@ struct StationDetailView : View {
                       Text("Station ID: \(station.station_id)")
                       Button(action: {
                         self.model.stationData[self.stationIndex].isFavourite.toggle()
+                        self.model.localFavourites(index: self.station.station_id)
                       }, label: {
                         Text(station.isFavourite ? "Remove Favorite" : "Make Favourite")
                       })

@@ -140,6 +140,23 @@ class StationDataModel : BindableObject {
     NotificationCenter.default.post(name: refreshNotification, object: self)
   }
   
+  func localFavourites(index:String){
+    
+    var copyFavourites = favourites
+    
+    if(copyFavourites.contains(index)){
+      copyFavourites.removeAll(where: { str in
+        str == index
+      })
+    } else {
+      copyFavourites.append(index)
+    }
+    
+    favourites = copyFavourites
+    
+  }
+  
+  
 }
 
 class DummyData : StationDataModel {
