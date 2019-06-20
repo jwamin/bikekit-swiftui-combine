@@ -32,7 +32,11 @@ struct GBFSStationStatusWrapper : GBFS{
 }
 
 
-public struct GBFSFullBikeInfo : GBFS, Identifiable{
+public struct GBFSFullBikeInfo : GBFS, Codable, Identifiable, Hashable{
+  
+  public static func == (lhs: GBFSFullBikeInfo, rhs: GBFSFullBikeInfo) -> Bool {
+    lhs.id == rhs.id
+  }
   
     static func initWithInfo(info:GBFSBikeStationInfo, status:GBFSBikeStationStatus) -> Self{
         
@@ -99,7 +103,7 @@ public struct GBFSBikeStationInfo:GBFS, Identifiable {
     
 }
 
-public enum GBFSRentalMethods : String, GBFS {
+public enum GBFSRentalMethods : String, Hashable, GBFS {
     case key = "KEY"
     case creditCard = "CREDITCARD"
     case paypass = "PAYPASS"
@@ -112,7 +116,7 @@ public enum GBFSRentalMethods : String, GBFS {
 
 //{"station_id":"304","num_bikes_available":6,"num_ebikes_available":0,"num_bikes_disabled":1,"num_docks_available":26,"num_docks_disabled":0,"is_installed":1,"is_renting":1,"is_returning":0,"last_reported":1557248000,"eightd_has_available_keys":true,"eightd_active_station_services":[{"id":"a58d9e34-2f28-40eb-b4a6-c8c01375657a"}]},
 
-public struct GBFSBikeStationStatus : GBFS{
+public struct GBFSBikeStationStatus : GBFS, Hashable{
     
     public let station_id:String
     public let num_bikes_available:Int

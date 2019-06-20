@@ -15,6 +15,9 @@ struct StationDetailView : View {
     @State var viewDidAppear:Bool = false
     @EnvironmentObject var model:StationDataModel
   
+  var stationIndex: Int {
+    model.stationData.firstIndex(where: { $0.id == station.id })!
+  }
   
     let mybasic = Animation.spring().delay(0.3)
     
@@ -56,6 +59,11 @@ struct StationDetailView : View {
                         Reporting(num: station.status.is_renting, symbol: "flag",str:"renting")
                         Reporting(num: station.status.is_returning, symbol: "star",str:"returning")
                       Text("Station ID: \(station.station_id)")
+                      Button(action: {
+                        self.model.stationData[self.stationIndex].isFavourite.toggle()
+                      }, label: {
+                        Text(station.isFavourite ? "Remove Favorite" : "Make Favourite")
+                      })
                 }
                     Text("Updated: \(adjustedDate)")
                 Spacer()

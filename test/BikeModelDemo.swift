@@ -33,14 +33,14 @@ class StationDataModel : BindableObject {
   var statusStream:AnyPublisher<[GBFSBikeStationStatus]?, Error>!
   
   //Subject for SwiftUI notification
-  var didChange = PassthroughSubject<Bool,Never>()
+  var didChange = PassthroughSubject<Void,Never>()
   
   //Actual Model data with property observer
   var stationData:[GBFSFullBikeInfo] = []{
     didSet{
       
       print(stationData.count)
-      self.didChange.send(true)
+      self.didChange.send()
     }
   }
   
@@ -56,22 +56,23 @@ class StationDataModel : BindableObject {
     
   }
   
-  
   func setupStatusStream(){
     
+    //TODO: process the result of status request
     let statusStream = NotificationCenter.default.publisher(for: statusNotification, object: self)
       .compactMap{ note in
         note.userInfo?["data"] as? Data
-      }
+    }
       .decode(type: GBFSStationStatusWrapper.self, decoder: decoder)
       .map{ decoded in
         decoded.data["stations"]
-      }
+    }
       .eraseToAnyPublisher()
     
     self.statusStream = statusStream
-    
+
   }
+
   
   
   private func setupCombineLatest(){
