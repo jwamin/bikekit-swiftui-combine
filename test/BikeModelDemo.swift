@@ -62,11 +62,11 @@ class StationDataModel : BindableObject {
     let statusStream = NotificationCenter.default.publisher(for: statusNotification, object: self)
       .compactMap{ note in
         note.userInfo?["data"] as? Data
-    }
+      }
       .decode(type: GBFSStationStatusWrapper.self, decoder: decoder)
       .map{ decoded in
         decoded.data["stations"]
-    }
+      }
       .eraseToAnyPublisher()
     
     self.statusStream = statusStream
