@@ -72,14 +72,14 @@ class StationDataModel : BindableObject {
 //        decoded.data["stations"]
 //    }
 //      .eraseToAnyPublisher()
-//    
+//
 //    self.statusStream = statusStream
 
 
   }
 
   
-  
+  /// Setup combineLatest Stream that processes the output of InfoStream and statusStream
   private func setupCombineLatest(){
     
     //Combine publishers with combine latest
