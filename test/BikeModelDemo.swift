@@ -14,6 +14,8 @@ class StationDataModel : BindableObject {
   @UserDefault("favourites", defaultValue: ["281"])
   var favourites:[String]
   
+  //tracker
+  var processes:Processes? = Processes()
   
   //Requests
   let infoRequest = URLRequest(url: Urls.STATION_INFO_URL)
@@ -46,6 +48,8 @@ class StationDataModel : BindableObject {
   
   init(){
     
+    processes?.delegate = self
+    
     //Setup Streams
     setupRefreshAndInfoStreams()
     setupStatusStream()
@@ -59,17 +63,18 @@ class StationDataModel : BindableObject {
   func setupStatusStream(){
     
     //TODO: process the result of status request
-    let statusStream = NotificationCenter.default.publisher(for: statusNotification, object: self)
-      .compactMap{ note in
-        note.userInfo?["data"] as? Data
-      }
-      .decode(type: GBFSStationStatusWrapper.self, decoder: decoder)
-      .map{ decoded in
-        decoded.data["stations"]
-      }
-      .eraseToAnyPublisher()
-    
-    self.statusStream = statusStream
+//    let statusStream = NotificationCenter.default.publisher(for: statusNotification, object: self)
+//      .compactMap{ note in
+//        note.userInfo?["data"] as? Data
+//    }
+//      .decode(type: GBFSStationStatusWrapper.self, decoder: decoder)
+//      .map{ decoded in
+//        decoded.data["stations"]
+//    }
+//      .eraseToAnyPublisher()
+//    
+//    self.statusStream = statusStream
+
 
   }
 
@@ -83,7 +88,7 @@ class StationDataModel : BindableObject {
       }
       .assertNoFailure()
       .map { info,status in
-        
+        self.processes?.increment(type: .combineLatest)
         var newInfo = [GBFSFullBikeInfo]()
         
         for station in info! {
@@ -112,7 +117,8 @@ class StationDataModel : BindableObject {
     //Main information stream, will complete once
     infoStream = URLSession.shared.dataTaskPublisher(for: infoRequest)
       .map{
-        $0.data
+        self.processes?.increment(type: .response)
+        return $0.data
       }
       .decode(type: GBFSStationInfoWrapper.self, decoder: decoder)
       .map{ decoded in
@@ -124,8 +130,10 @@ class StationDataModel : BindableObject {
     refreshStream = NotificationCenter.default.publisher(for: refreshNotification, object: self)
       .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
       .sink { (notification) in
+        self.processes?.increment(type: .refresh)
         _ = URLSession.shared.dataTaskPublisher(for: self.statusRequest)
           .sink{ info in
+            self.processes?.increment(type: .response)
             let userinfo = ["data":info.data]
             NotificationCenter.default.post(name: self.statusNotification, object: self, userInfo: userinfo)
         }
@@ -159,6 +167,14 @@ class StationDataModel : BindableObject {
   
 }
 
+extension StationDataModel : ProcessDelegate{
+  
+  func updated() {
+    didChange.send()
+  }
+  
+}
+
 class DummyData : StationDataModel {
   
   override func refresh(){
@@ -166,10 +182,3 @@ class DummyData : StationDataModel {
   }
   
 }
-
-
-
-
-
-
-

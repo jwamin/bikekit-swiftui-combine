@@ -31,8 +31,24 @@ struct ContentView : View {
   var body: some View {
     NavigationView{
       List{
+        
         Section{
-          TextField($searchString, placeholder: Text("Search"))
+            Text(model.processes?.getString() ?? "")
+                .lineLimit(0)
+        }
+        if(model.stationData.count==0){
+          Section{
+            HStack(alignment:.center){
+              Spacer()
+              ActivityView()
+              Text("loading...")
+              Spacer()
+            }
+          }
+        } else {
+          Section{
+            TextField($searchString, placeholder: Text("Search"))
+          }
         }
         Section{
           ForEach(model.stationData) { station in

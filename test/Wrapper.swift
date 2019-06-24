@@ -6,7 +6,8 @@
 //  Copyright © 2019 Joss Manger. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import SwiftUI
 
 @propertyWrapper
 struct UserDefault<T> {
@@ -26,4 +27,18 @@ struct UserDefault<T> {
       UserDefaults.standard.set(newValue, forKey: key)
     }
   }
+}
+
+struct ActivityView : UIViewRepresentable{
+  
+  let style:UIActivityIndicatorView.Style = .medium
+  
+  public func makeUIView(context: UIViewRepresentableContext<ActivityView>) -> UIActivityIndicatorView {
+    return UIActivityIndicatorView(style: style)
+  }
+  
+  public func updateUIView(_ uiView: UIActivityIndicatorView, context: UIViewRepresentableContext<ActivityView>) {
+    uiView.startAnimating()
+  }
+  
 }

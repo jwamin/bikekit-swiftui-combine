@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		570D760922B1888B000795BB /* StationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570D760822B1888B000795BB /* StationDetailView.swift */; };
+		5724723B22C115DB0044050A /* CombineDemoEventTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5724723A22C115DB0044050A /* CombineDemoEventTracker.swift */; };
 		575B1F7022B18734002A18B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575B1F6F22B18734002A18B0 /* AppDelegate.swift */; };
 		575B1F7222B18734002A18B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575B1F7122B18734002A18B0 /* SceneDelegate.swift */; };
 		575B1F7422B18734002A18B0 /* MainListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575B1F7322B18734002A18B0 /* MainListView.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		570D760822B1888B000795BB /* StationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailView.swift; sourceTree = "<group>"; };
+		5724723A22C115DB0044050A /* CombineDemoEventTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineDemoEventTracker.swift; sourceTree = "<group>"; };
 		575B1F6C22B18734002A18B0 /* BikeTestSwiftUICombine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BikeTestSwiftUICombine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		575B1F6F22B18734002A18B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		575B1F7122B18734002A18B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			children = (
 				575B1F8B22B187A1002A18B0 /* data */,
 				57DD097722B7F32C00E4CFAE /* BikeModelDemo.swift */,
+				5724723A22C115DB0044050A /* CombineDemoEventTracker.swift */,
 				578D8E8E22BBDE5A0079B9F1 /* Wrapper.swift */,
 				57DD097F22B8377600E4CFAE /* TestData.swift */,
 				57DD097D22B8377400E4CFAE /* BikeModel.swift */,
@@ -186,6 +189,7 @@
 				57DD097C22B8376900E4CFAE /* CodableStructs.swift in Sources */,
 				575B1F8A22B18768002A18B0 /* Constants.swift in Sources */,
 				57F8B78522B979EA00613CCB /* BikeModelDemo.swift in Sources */,
+				5724723B22C115DB0044050A /* CombineDemoEventTracker.swift in Sources */,
 				578D8E8F22BBDE5A0079B9F1 /* Wrapper.swift in Sources */,
 				57F0F49322B4364A001361AB /* MapView.swift in Sources */,
 				575B1F8722B18768002A18B0 /* CombineNetworking.swift in Sources */,
