@@ -45,7 +45,7 @@ class Processes {
       return ""
     }
     
-    return "Responses: \(responses)\nCalls to CombineLatest: \(combineLatestCalls)\nRefreshed: \(refreshes)"
+    return "API Responses: \(responses)\nCalls to CombineLatest: \(combineLatestCalls)\nRefreshed: \(refreshes)"
     
   }
   

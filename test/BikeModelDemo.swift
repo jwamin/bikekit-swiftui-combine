@@ -33,6 +33,7 @@ class StationDataModel : BindableObject {
   var refreshStream: AnySubscriber<NotificationCenter.Publisher.Output, NotificationCenter.Publisher.Failure>?
   var infoStream:AnyPublisher<[GBFSBikeStationInfo]?, Error>?
   var statusStream:AnyPublisher<[GBFSBikeStationStatus]?, Error>!
+  var combinedStream:AnyCancellable!
   
   //Subject for SwiftUI notification
   var didChange = PassthroughSubject<Void,Never>()
@@ -60,20 +61,21 @@ class StationDataModel : BindableObject {
     
   }
   
-  func setupStatusStream(){
+  private func setupStatusStream(){
     
     //TODO: process the result of status request
-//    let statusStream = NotificationCenter.default.publisher(for: statusNotification, object: self)
-//      .compactMap{ note in
-//        note.userInfo?["data"] as? Data
-//    }
-//      .decode(type: GBFSStationStatusWrapper.self, decoder: decoder)
-//      .map{ decoded in
-//        decoded.data["stations"]
-//    }
-//      .eraseToAnyPublisher()
-//
-//    self.statusStream = statusStream
+
+    let statusStream = NotificationCenter.default.publisher(for: statusNotification, object: self)
+      .compactMap{ note in
+        note.userInfo?["data"] as? Data
+    }
+      .decode(type: GBFSStationStatusWrapper.self, decoder: decoder)
+      .map{ decoded in
+        decoded.data["stations"]
+    }
+      .eraseToAnyPublisher()
+    
+    self.statusStream = statusStream
 
 
   }
@@ -83,7 +85,7 @@ class StationDataModel : BindableObject {
   private func setupCombineLatest(){
     
     //Combine publishers with combine latest
-    _ = Publishers.CombineLatest(infoStream,statusStream){
+    combinedStream = Publishers.CombineLatest(infoStream,statusStream){
       ($0,$1)
       }
       .assertNoFailure()
