@@ -8,13 +8,12 @@
 
 import SwiftUI
 
-struct ContentView : View {
+struct MainListView : View {
   
-  @ObjectBinding var model:StationDataModel = StationDataModel()
+  @EnvironmentObject var model:StationDataModel
   
   @State var showFavourites:Bool = false
   @State var searchString:String = ""
-  
   
   func getColor(station:GBFSFullBikeInfo)->Color{
     (station.status.is_renting==1) ? Color.blue : Color.red
@@ -54,7 +53,7 @@ struct ContentView : View {
           ForEach(model.stationData) { station in
             if !self.showFavourites || station.isFavourite { //Both cases, this is important!
               if self.filter(station: station) {
-              NavigationButton(destination:StationDetailView(station:station).environmentObject(self.model)){
+              NavigationButton(destination:StationDetailView(station:station)){
                 StationCell(model: station)
                 }.padding()
                 .background(self.getColor(station: station))
@@ -127,7 +126,8 @@ struct NumberSymbolProvider : View {
 struct ContentView_Previews : PreviewProvider {
   static var previews: some View {
     Group{
-      ContentView(model: DummyData())
+      MainListView()
+        .environmentObject(DummyData())
       //            ContentView(model: DummyData())
       //                .environment(\.colorScheme, .dark)
       //                .environment(\.sizeCategory, .extraExtraExtraLarge)

@@ -150,7 +150,7 @@ class StationDataModel : BindableObject {
     NotificationCenter.default.post(name: refreshNotification, object: self)
   }
   
-  func localFavourites(index:String){
+  func localFavourites(index:String,id:Int){
     
     var copyFavourites = favourites
     
@@ -164,6 +164,8 @@ class StationDataModel : BindableObject {
     
     favourites = copyFavourites
     
+    stationData[id].isFavourite.toggle()
+    didChange.send()
   }
   
   
@@ -178,6 +180,8 @@ extension StationDataModel : ProcessDelegate{
 }
 
 class DummyData : StationDataModel {
+  
+  override init() { }
   
   override func refresh(){
     stationData = testData
