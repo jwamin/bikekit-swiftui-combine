@@ -16,16 +16,16 @@ var testData:[GBFSFullBikeInfo] = {
     let infoStream = load(file: "data/stations.json").decode(type: GBFSStationInfoWrapper.self, decoder: JSONDecoder())
         .map{ data in
             data.data["stations"]
-        }
-        //.eraseToAnyPublisher()
+        }.assertNoFailure()
+        .eraseToAnyPublisher()
     
     let statusStream = load(file:"data/status.json").decode(type: GBFSStationStatusWrapper.self, decoder: JSONDecoder())
         .map{ data in
             data.data["stations"]
-        }
-        //.eraseToAnyPublisher()
+      }.assertNoFailure()
+        .eraseToAnyPublisher()
     
-    _ = Publishers.Zip(infoStream, statusStream).sink { tuple in
+  _ = Publishers.Zip(infoStream, statusStream).sink { tuple in
         let info = tuple.0!
         let status = tuple.1!
         
@@ -53,6 +53,6 @@ func load(file:String)->AnyPublisher<Data,Never>{
     
     let data = try! Data(contentsOf: file)
     
-    return Publishers.Just(data).eraseToAnyPublisher()
+    return Just(data).eraseToAnyPublisher()
     
 }

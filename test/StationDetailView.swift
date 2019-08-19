@@ -50,8 +50,8 @@ struct StationDetailView : View {
         .padding(.bottom, -78)
       
       VStack{
-        Text(station.name).font(.title).color(.white).lineLimit(2).padding()
-        Text("Capacity: \(station.capacity!)").font(.subheadline).color(.white)
+        Text(station.name).font(.title).foregroundColor(.white).lineLimit(2).padding()
+        Text("Capacity: \(station.capacity!)").font(.subheadline).foregroundColor(.white)
       }
       
       VStack(alignment:.leading){
@@ -143,7 +143,7 @@ struct SymbolView : View {
         .opacity(didAppear ? 1.0 : 0)
       
       Text(label)
-        .font(.subheadline).color(.white)
+        .font(.subheadline).foregroundColor(.white)
       }.padding()
       .background(color).cornerRadius(25).accentColor(.yellow)
     

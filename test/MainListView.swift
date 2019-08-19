@@ -37,23 +37,18 @@ struct MainListView : View {
         }
         if(model.stationData.count==0){
           Section{
-            HStack(alignment:.center){
-              Spacer()
-              ActivityView()
-              Text("loading...")
-              Spacer()
-            }
+            Text("hello world")
           }
         } else {
           Section{
-            TextField($searchString, placeholder: Text("Search"))
+            Text("somthing here too")
           }
         }
         Section{
           ForEach(model.stationData) { station in
             if !self.showFavourites || station.isFavourite { //Both cases, this is important!
               if self.filter(station: station) {
-              NavigationButton(destination:StationDetailView(station:station)){
+              Button(destination:StationDetailView(station:station)){
                 StationCell(model: station)
                 }.padding()
                 .background(self.getColor(station: station))

@@ -15,7 +15,6 @@
 		575B1F7622B18736002A18B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 575B1F7522B18736002A18B0 /* Assets.xcassets */; };
 		575B1F7922B18736002A18B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 575B1F7822B18736002A18B0 /* Preview Assets.xcassets */; };
 		575B1F7C22B18736002A18B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 575B1F7A22B18736002A18B0 /* LaunchScreen.storyboard */; };
-		575B1F8722B18768002A18B0 /* CombineNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575B1F8322B18767002A18B0 /* CombineNetworking.swift */; };
 		575B1F8A22B18768002A18B0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575B1F8622B18768002A18B0 /* Constants.swift */; };
 		575B1F8C22B187A1002A18B0 /* data in Resources */ = {isa = PBXBuildFile; fileRef = 575B1F8B22B187A1002A18B0 /* data */; };
 		578D8E8F22BBDE5A0079B9F1 /* Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578D8E8E22BBDE5A0079B9F1 /* Wrapper.swift */; };
@@ -192,7 +191,6 @@
 				5724723B22C115DB0044050A /* CombineDemoEventTracker.swift in Sources */,
 				578D8E8F22BBDE5A0079B9F1 /* Wrapper.swift in Sources */,
 				57F0F49322B4364A001361AB /* MapView.swift in Sources */,
-				575B1F8722B18768002A18B0 /* CombineNetworking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +331,7 @@
 				DEVELOPMENT_TEAM = 3C42F7N9CQ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = test/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -353,6 +352,7 @@
 				DEVELOPMENT_TEAM = 3C42F7N9CQ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = test/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

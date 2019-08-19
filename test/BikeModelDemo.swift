@@ -9,7 +9,7 @@
 import SwiftUI
 import Combine
 
-class StationDataModel : BindableObject {
+class StationDataModel : ObservableObject {
   
   @UserDefault("favourites", defaultValue: ["281"])
   var favourites:[String]
@@ -30,9 +30,9 @@ class StationDataModel : BindableObject {
   let decoder = JSONDecoder()
   
   //Streams
-  var refreshStream: AnySubscriber<NotificationCenter.Publisher.Output, NotificationCenter.Publisher.Failure>?
-  var infoStream:AnyPublisher<[GBFSBikeStationInfo]?, Error>?
-  var statusStream:AnyPublisher<[GBFSBikeStationStatus]?, Error>!
+  var refreshStream: AnyCancellable
+  var infoStream:AnyPublisher<[GBFSBikeStationInfo]?, Never>!
+  var statusStream:AnyPublisher<[GBFSBikeStationStatus]?, Never>!
   var combinedStream:AnyCancellable!
   
   //Subject for SwiftUI notification
@@ -72,7 +72,7 @@ class StationDataModel : BindableObject {
       .decode(type: GBFSStationStatusWrapper.self, decoder: decoder)
       .map{ decoded in
         decoded.data["stations"]
-    }
+      }.assertNoFailure()
       .eraseToAnyPublisher()
     
     self.statusStream = statusStream
@@ -85,6 +85,7 @@ class StationDataModel : BindableObject {
   private func setupCombineLatest(){
     
     //Combine publishers with combine latest
+    
     combinedStream = Publishers.CombineLatest(infoStream,statusStream){
       ($0,$1)
       }
@@ -126,20 +127,24 @@ class StationDataModel : BindableObject {
       .map{ decoded in
         decoded.data["stations"]
       }
+  .assertNoFailure()
       .eraseToAnyPublisher()
     
     //listens for push on refresh button and debounces
-    refreshStream = NotificationCenter.default.publisher(for: refreshNotification, object: self)
-      .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
-      .sink { (notification) in
+    let refreshStream = NotificationCenter.default.publisher(for: refreshNotification, object: self)
+      .debounce(for: .milliseconds(500), scheduler: RunLoop.main).eraseToAnyPublisher()
+      
+      
+    _ = refreshStream.sink { (notification) in
         self.processes?.increment(type: .refresh)
         _ = URLSession.shared.dataTaskPublisher(for: self.statusRequest)
+          .assertNoFailure()
           .sink{ info in
             self.processes?.increment(type: .response)
             let userinfo = ["data":info.data]
             NotificationCenter.default.post(name: self.statusNotification, object: self, userInfo: userinfo)
         }
-      }.eraseToAnySubscriber()
+    }
     
     
   }
