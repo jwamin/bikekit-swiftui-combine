@@ -41,11 +41,12 @@ struct StationDetailView : View {
       MapView(coordinate: station.coordinate)
         .frame(height:300)
       
-      HStack(alignment: .center, spacing: 50){
-        
+      HStack(alignment: .center){
+        Spacer()
         SymbolView(color: .yellow, number: fixNumber(num: station.status.num_bikes_available), didAppear: $viewDidAppear)
+        Spacer()
         SymbolView(color: .red, label: "Docks", number: fixNumber(num: station.status.num_docks_available), didAppear: $viewDidAppear)
-        
+        Spacer()
         }.offset(y:-78)
         .padding(.bottom, -78)
       
@@ -135,7 +136,7 @@ struct SymbolView : View {
       
       Image(systemName:"\(number).circle")
         .resizable()
-        .frame(height:75)
+        .frame(width:75,height:75)
         .foregroundColor(.white)
         .padding()
         .aspectRatio(1,contentMode: .fit)
@@ -157,7 +158,7 @@ struct SymbolView : View {
 struct StationDetailView_Previews : PreviewProvider {
   static var previews: some View {
     return StationDetailView(station: testData[0])
-      .environmentObject(DummyData())
+      .environmentObject(StationDataModel.dummy)
   }
 }
 #endif

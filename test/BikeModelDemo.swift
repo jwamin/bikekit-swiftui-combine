@@ -30,20 +30,21 @@ class StationDataModel : ObservableObject {
   let decoder = JSONDecoder()
   
   //Streams
-  var refreshStream: AnyCancellable
+  var refreshStream: AnyCancellable!
   var infoStream:AnyPublisher<[GBFSBikeStationInfo]?, Never>!
   var statusStream:AnyPublisher<[GBFSBikeStationStatus]?, Never>!
   var combinedStream:AnyCancellable!
   
   //Subject for SwiftUI notification
-  var didChange = PassthroughSubject<Void,Never>()
+  var objectWillChange:ObservableObjectPublisher = ObservableObjectPublisher()
+  
   
   //Actual Model data with property observer
   var stationData:[GBFSFullBikeInfo] = []{
     didSet{
       
       print(stationData.count)
-      self.didChange.send()
+      self.objectWillChange.send()
     }
   }
   
@@ -64,33 +65,36 @@ class StationDataModel : ObservableObject {
   private func setupStatusStream(){
     
     //TODO: process the result of status request
-
+    
     let statusStream = NotificationCenter.default.publisher(for: statusNotification, object: self)
       .compactMap{ note in
         note.userInfo?["data"] as? Data
     }
-      .decode(type: GBFSStationStatusWrapper.self, decoder: decoder)
-      .map{ decoded in
-        decoded.data["stations"]
-      }.assertNoFailure()
-      .eraseToAnyPublisher()
+    .decode(type: GBFSStationStatusWrapper.self, decoder: decoder)
+    .map{ decoded in
+      decoded.data["stations"]
+    }
+    .assertNoFailure()
+    .eraseToAnyPublisher()
     
     self.statusStream = statusStream
-
-
+    
+    
+    
+    
+    
+    
   }
-
+  
   
   /// Setup combineLatest Stream that processes the output of InfoStream and statusStream
   private func setupCombineLatest(){
     
     //Combine publishers with combine latest
     
-    combinedStream = Publishers.CombineLatest(infoStream,statusStream){
-      ($0,$1)
-      }
-      .assertNoFailure()
+    combinedStream = Publishers.CombineLatest(infoStream,statusStream)
       .map { info,status in
+        print("whaaaa")
         self.processes?.increment(type: .combineLatest)
         var newInfo = [GBFSFullBikeInfo]()
         
@@ -108,7 +112,7 @@ class StationDataModel : ObservableObject {
         }
         
         return newInfo
-      }.receive(on: RunLoop.main).assign(to: \.stationData, on: self)
+    }.assertNoFailure().receive(on: RunLoop.main).assign(to: \.stationData, on: self)
   }
   
   
@@ -122,28 +126,46 @@ class StationDataModel : ObservableObject {
       .map{
         self.processes?.increment(type: .response)
         return $0.data
-      }
-      .decode(type: GBFSStationInfoWrapper.self, decoder: decoder)
-      .map{ decoded in
-        decoded.data["stations"]
-      }
-  .assertNoFailure()
-      .eraseToAnyPublisher()
+    }
+    .decode(type: GBFSStationInfoWrapper.self, decoder: decoder)
+    .map{ decoded in
+      decoded.data["stations"]
+    }
+    .assertNoFailure()
+    .eraseToAnyPublisher()
     
     //listens for push on refresh button and debounces
-    let refreshStream = NotificationCenter.default.publisher(for: refreshNotification, object: self)
-      .debounce(for: .milliseconds(500), scheduler: RunLoop.main).eraseToAnyPublisher()
-      
-      
-    _ = refreshStream.sink { (notification) in
+    refreshStream = NotificationCenter.default.publisher(for: refreshNotification, object: self)
+      .debounce(for: .milliseconds(500), scheduler: RunLoop.main).eraseToAnyPublisher().sink { (notification) in
         self.processes?.increment(type: .refresh)
-        _ = URLSession.shared.dataTaskPublisher(for: self.statusRequest)
-          .assertNoFailure()
-          .sink{ info in
+        
+        
+        URLSession.shared.dataTaskPublisher(for: self.statusRequest).map({ response in
+          return response.data
+        }).replaceError(with: Data())
+          .receive(on: RunLoop.main).sink { info in
             self.processes?.increment(type: .response)
-            let userinfo = ["data":info.data]
+            let userinfo = ["data":info]
             NotificationCenter.default.post(name: self.statusNotification, object: self, userInfo: userinfo)
         }
+        
+//        _ = URLSession.shared.dataTaskPublisher(for: self.statusRequest)
+////          .tryCatch({ (error) -> AnyPublisher<URLSession.DataTaskPublisher.Output,Error> in
+////            print(error)
+////            fatalError()
+////            return AnyPublisher<URLSession.DataTaskPublisher.Output,Error>(Empty())
+////          })
+//          .map{ input -> URLSession.DataTaskPublisher.Output in
+//            print("errrr",input)
+//            return input
+//        }
+//          .assertNoFailure()
+//          .sink{ info in
+//            self.processes?.increment(type: .response)
+//            let userinfo = ["data":info.data]
+//            NotificationCenter.default.post(name: self.statusNotification, object: self, userInfo: userinfo)
+//        }
+        
     }
     
     
@@ -170,8 +192,16 @@ class StationDataModel : ObservableObject {
     favourites = copyFavourites
     
     stationData[id].isFavourite.toggle()
-    didChange.send()
+    objectWillChange.send()
   }
+  
+  
+  #if DEBUG
+  static var dummy:StationDataModel = {
+    let dummy = DummyData()
+    return dummy
+  }()
+  #endif
   
   
 }
@@ -179,7 +209,7 @@ class StationDataModel : ObservableObject {
 extension StationDataModel : ProcessDelegate{
   
   func updated() {
-    didChange.send()
+    self.objectWillChange.send()
   }
   
 }

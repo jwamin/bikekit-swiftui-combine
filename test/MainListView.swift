@@ -33,22 +33,23 @@ struct MainListView : View {
         
         Section{
             Text(model.processes?.getString() ?? "")
-                .lineLimit(0)
+              .lineLimit(nil)
+              .fixedSize(horizontal: true, vertical: false)
         }
         if(model.stationData.count==0){
           Section{
-            Text("hello world")
+            Text("No stations returned")
           }
         } else {
           Section{
-            Text("somthing here too")
+            Text("Success, got stations...")
           }
         }
         Section{
           ForEach(model.stationData) { station in
             if !self.showFavourites || station.isFavourite { //Both cases, this is important!
               if self.filter(station: station) {
-              Button(destination:StationDetailView(station:station)){
+          NavigationLink(destination:StationDetailView(station:station)){
                 StationCell(model: station)
                 }.padding()
                 .background(self.getColor(station: station))
@@ -58,8 +59,8 @@ struct MainListView : View {
             }
           }
         }
-        }.navigationBarTitle(Text("Bike Stations"))
-        .listStyle(.grouped)
+      }.navigationBarTitle(Text("Bike Stations"))
+        
         .navigationBarItems(leading:Button(action: {self.showFavourites = !self.showFavourites}, label: {
           withAnimation{
             (self.showFavourites) ? Image(systemName: "star.fill") : Image(systemName: "star")
@@ -67,7 +68,7 @@ struct MainListView : View {
         }) ,trailing: Button(action: {self.model.refresh()}, label: {
           Image(systemName: "arrow.clockwise")
         }))
-      }.accentColor(.white)
+      }
   }
 }
 
@@ -122,7 +123,7 @@ struct ContentView_Previews : PreviewProvider {
   static var previews: some View {
     Group{
       MainListView()
-        .environmentObject(DummyData())
+        .environmentObject(StationDataModel.dummy)
       //            ContentView(model: DummyData())
       //                .environment(\.colorScheme, .dark)
       //                .environment(\.sizeCategory, .extraExtraExtraLarge)

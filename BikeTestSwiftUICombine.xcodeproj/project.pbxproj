@@ -85,13 +85,13 @@
 				57DD097F22B8377600E4CFAE /* TestData.swift */,
 				57DD097D22B8377400E4CFAE /* BikeModel.swift */,
 				57DD097B22B8376900E4CFAE /* CodableStructs.swift */,
-				575B1F8322B18767002A18B0 /* CombineNetworking.swift */,
 				575B1F8622B18768002A18B0 /* Constants.swift */,
 				575B1F6F22B18734002A18B0 /* AppDelegate.swift */,
 				575B1F7122B18734002A18B0 /* SceneDelegate.swift */,
 				575B1F7322B18734002A18B0 /* MainListView.swift */,
 				570D760822B1888B000795BB /* StationDetailView.swift */,
 				57F0F49222B4364A001361AB /* MapView.swift */,
+				57E458F72327D7EF00A8E8A4 /* dead */,
 				575B1F7522B18736002A18B0 /* Assets.xcassets */,
 				575B1F7A22B18736002A18B0 /* LaunchScreen.storyboard */,
 				575B1F7D22B18736002A18B0 /* Info.plist */,
@@ -106,6 +106,14 @@
 				575B1F7822B18736002A18B0 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		57E458F72327D7EF00A8E8A4 /* dead */ = {
+			isa = PBXGroup;
+			children = (
+				575B1F8322B18767002A18B0 /* CombineNetworking.swift */,
+			);
+			path = dead;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
