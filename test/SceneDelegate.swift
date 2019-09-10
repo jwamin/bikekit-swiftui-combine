@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Use a UIHostingController as window root view controller
-      let contentView = MainListView().environmentObject(model)
+      let contentView = StationListView().environmentObject(model)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

@@ -9,28 +9,31 @@
 /* Begin PBXBuildFile section */
 		570D760922B1888B000795BB /* StationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570D760822B1888B000795BB /* StationDetailView.swift */; };
 		5724723B22C115DB0044050A /* CombineDemoEventTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5724723A22C115DB0044050A /* CombineDemoEventTracker.swift */; };
+		574C34652327F837002ED50A /* BikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574C34642327F837002ED50A /* BikeModel.swift */; };
+		574C34672327F83D002ED50A /* CodableStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574C34662327F83D002ED50A /* CodableStructs.swift */; };
+		574C346B2327F869002ED50A /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574C346A2327F869002ED50A /* TestData.swift */; };
 		575B1F7022B18734002A18B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575B1F6F22B18734002A18B0 /* AppDelegate.swift */; };
 		575B1F7222B18734002A18B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575B1F7122B18734002A18B0 /* SceneDelegate.swift */; };
-		575B1F7422B18734002A18B0 /* MainListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575B1F7322B18734002A18B0 /* MainListView.swift */; };
+		575B1F7422B18734002A18B0 /* StationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575B1F7322B18734002A18B0 /* StationListView.swift */; };
 		575B1F7622B18736002A18B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 575B1F7522B18736002A18B0 /* Assets.xcassets */; };
 		575B1F7922B18736002A18B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 575B1F7822B18736002A18B0 /* Preview Assets.xcassets */; };
 		575B1F7C22B18736002A18B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 575B1F7A22B18736002A18B0 /* LaunchScreen.storyboard */; };
 		575B1F8A22B18768002A18B0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575B1F8622B18768002A18B0 /* Constants.swift */; };
 		575B1F8C22B187A1002A18B0 /* data in Resources */ = {isa = PBXBuildFile; fileRef = 575B1F8B22B187A1002A18B0 /* data */; };
-		578D8E8F22BBDE5A0079B9F1 /* Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578D8E8E22BBDE5A0079B9F1 /* Wrapper.swift */; };
-		57DD097C22B8376900E4CFAE /* CodableStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DD097B22B8376900E4CFAE /* CodableStructs.swift */; };
-		57DD098022B8377700E4CFAE /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DD097F22B8377600E4CFAE /* TestData.swift */; };
+		578D8E8F22BBDE5A0079B9F1 /* UserDefaultsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578D8E8E22BBDE5A0079B9F1 /* UserDefaultsWrapper.swift */; };
 		57F0F49322B4364A001361AB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F0F49222B4364A001361AB /* MapView.swift */; };
-		57F8B78522B979EA00613CCB /* BikeModelDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DD097722B7F32C00E4CFAE /* BikeModelDemo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		570D760822B1888B000795BB /* StationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailView.swift; sourceTree = "<group>"; };
 		5724723A22C115DB0044050A /* CombineDemoEventTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineDemoEventTracker.swift; sourceTree = "<group>"; };
+		574C34642327F837002ED50A /* BikeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeModel.swift; sourceTree = "<group>"; };
+		574C34662327F83D002ED50A /* CodableStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableStructs.swift; sourceTree = "<group>"; };
+		574C346A2327F869002ED50A /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		575B1F6C22B18734002A18B0 /* BikeTestSwiftUICombine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BikeTestSwiftUICombine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		575B1F6F22B18734002A18B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		575B1F7122B18734002A18B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		575B1F7322B18734002A18B0 /* MainListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListView.swift; sourceTree = "<group>"; };
+		575B1F7322B18734002A18B0 /* StationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationListView.swift; sourceTree = "<group>"; };
 		575B1F7522B18736002A18B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		575B1F7822B18736002A18B0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		575B1F7B22B18736002A18B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -39,11 +42,8 @@
 		575B1F8622B18768002A18B0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		575B1F8B22B187A1002A18B0 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
 		57633D7522B2E87A00025F7F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		578D8E8E22BBDE5A0079B9F1 /* Wrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wrapper.swift; sourceTree = "<group>"; };
-		57DD097722B7F32C00E4CFAE /* BikeModelDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BikeModelDemo.swift; sourceTree = "<group>"; };
-		57DD097B22B8376900E4CFAE /* CodableStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableStructs.swift; sourceTree = "<group>"; };
+		578D8E8E22BBDE5A0079B9F1 /* UserDefaultsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWrapper.swift; sourceTree = "<group>"; };
 		57DD097D22B8377400E4CFAE /* BikeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeModel.swift; sourceTree = "<group>"; };
-		57DD097F22B8377600E4CFAE /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		57F0F49222B4364A001361AB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,6 +58,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		574C34622327F7C5002ED50A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				5724723A22C115DB0044050A /* CombineDemoEventTracker.swift */,
+				578D8E8E22BBDE5A0079B9F1 /* UserDefaultsWrapper.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		574C34632327F82C002ED50A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				574C34642327F837002ED50A /* BikeModel.swift */,
+				574C34662327F83D002ED50A /* CodableStructs.swift */,
+				574C346A2327F869002ED50A /* TestData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		575B1F6322B18734002A18B0 = {
 			isa = PBXGroup;
 			children = (
@@ -78,20 +97,16 @@
 		575B1F6E22B18734002A18B0 /* test */ = {
 			isa = PBXGroup;
 			children = (
-				575B1F8B22B187A1002A18B0 /* data */,
-				57DD097722B7F32C00E4CFAE /* BikeModelDemo.swift */,
-				5724723A22C115DB0044050A /* CombineDemoEventTracker.swift */,
-				578D8E8E22BBDE5A0079B9F1 /* Wrapper.swift */,
-				57DD097F22B8377600E4CFAE /* TestData.swift */,
-				57DD097D22B8377400E4CFAE /* BikeModel.swift */,
-				57DD097B22B8376900E4CFAE /* CodableStructs.swift */,
-				575B1F8622B18768002A18B0 /* Constants.swift */,
+				574C34632327F82C002ED50A /* Model */,
 				575B1F6F22B18734002A18B0 /* AppDelegate.swift */,
 				575B1F7122B18734002A18B0 /* SceneDelegate.swift */,
-				575B1F7322B18734002A18B0 /* MainListView.swift */,
+				575B1F8622B18768002A18B0 /* Constants.swift */,
+				575B1F7322B18734002A18B0 /* StationListView.swift */,
 				570D760822B1888B000795BB /* StationDetailView.swift */,
 				57F0F49222B4364A001361AB /* MapView.swift */,
+				574C34622327F7C5002ED50A /* Utilities */,
 				57E458F72327D7EF00A8E8A4 /* dead */,
+				575B1F8B22B187A1002A18B0 /* data */,
 				575B1F7522B18736002A18B0 /* Assets.xcassets */,
 				575B1F7A22B18736002A18B0 /* LaunchScreen.storyboard */,
 				575B1F7D22B18736002A18B0 /* Info.plist */,
@@ -111,6 +126,7 @@
 		57E458F72327D7EF00A8E8A4 /* dead */ = {
 			isa = PBXGroup;
 			children = (
+				57DD097D22B8377400E4CFAE /* BikeModel.swift */,
 				575B1F8322B18767002A18B0 /* CombineNetworking.swift */,
 			);
 			path = dead;
@@ -188,16 +204,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57DD098022B8377700E4CFAE /* TestData.swift in Sources */,
 				575B1F7022B18734002A18B0 /* AppDelegate.swift in Sources */,
+				574C346B2327F869002ED50A /* TestData.swift in Sources */,
+				574C34672327F83D002ED50A /* CodableStructs.swift in Sources */,
 				570D760922B1888B000795BB /* StationDetailView.swift in Sources */,
 				575B1F7222B18734002A18B0 /* SceneDelegate.swift in Sources */,
-				575B1F7422B18734002A18B0 /* MainListView.swift in Sources */,
-				57DD097C22B8376900E4CFAE /* CodableStructs.swift in Sources */,
+				575B1F7422B18734002A18B0 /* StationListView.swift in Sources */,
 				575B1F8A22B18768002A18B0 /* Constants.swift in Sources */,
-				57F8B78522B979EA00613CCB /* BikeModelDemo.swift in Sources */,
 				5724723B22C115DB0044050A /* CombineDemoEventTracker.swift in Sources */,
-				578D8E8F22BBDE5A0079B9F1 /* Wrapper.swift in Sources */,
+				578D8E8F22BBDE5A0079B9F1 /* UserDefaultsWrapper.swift in Sources */,
+				574C34652327F837002ED50A /* BikeModel.swift in Sources */,
 				57F0F49322B4364A001361AB /* MapView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

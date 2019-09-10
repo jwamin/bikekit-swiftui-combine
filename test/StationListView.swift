@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct MainListView : View {
+struct StationListView : View {
   
   @EnvironmentObject var model:StationDataModel
   
@@ -119,10 +119,10 @@ struct NumberSymbolProvider : View {
 }
 
 #if DEBUG
-struct ContentView_Previews : PreviewProvider {
+struct StationListView_Previews : PreviewProvider {
   static var previews: some View {
     Group{
-      MainListView()
+      StationListView()
         .environmentObject(StationDataModel.dummy)
       //            ContentView(model: DummyData())
       //                .environment(\.colorScheme, .dark)

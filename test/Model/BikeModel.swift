@@ -140,7 +140,7 @@ class StationDataModel : ObservableObject {
         self.processes?.increment(type: .refresh)
         
         
-        URLSession.shared.dataTaskPublisher(for: self.statusRequest).map({ response in
+        _ = URLSession.shared.dataTaskPublisher(for: self.statusRequest).map({ response in
           return response.data
         }).replaceError(with: Data())
           .receive(on: RunLoop.main).sink { info in

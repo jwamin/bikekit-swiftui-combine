@@ -110,7 +110,11 @@ struct Reporting : View {
   
   var body: some View{
     HStack(alignment:.center){
-      Image(systemName: symbolString).resizable().frame(width: 50, height: 50).padding().background( (slash) ? Color.gray : Color.blue).cornerRadius(25)
+      Image(systemName: symbolString)
+        .resizable()
+        .frame(width: 50, height: 50)
+        .padding()
+        .background( (slash) ? Color.gray : Color.blue).cornerRadius(25)
       Text("\((slash) ? "Not " : "" )"+str)
     }
   }
