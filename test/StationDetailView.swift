@@ -161,8 +161,14 @@ struct SymbolView : View {
 #if DEBUG
 struct StationDetailView_Previews : PreviewProvider {
   static var previews: some View {
-    return StationDetailView(station: testData[0])
+    Group{
+    StationDetailView(station: testData[0])
       .environmentObject(StationDataModel.dummy)
+      Reporting(num: 1, symbol: "doc.richtext", str: "richtext")
+        .previewLayout(.sizeThatFits)
+      Image(systemName: "doc.richtext").imageScale(.large).frame(width: 50, height: 50).previewLayout(.sizeThatFits)
+            Image(systemName: "star").imageScale(.large).frame(width: 50, height: 50).previewLayout(.sizeThatFits)
+    }
   }
 }
 #endif
